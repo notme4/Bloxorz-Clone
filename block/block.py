@@ -1,15 +1,17 @@
 from enum import Enum
 
+import pygame
+
 
 class Orientation(Enum):
-    VERTICAL = 0 # |
-    HORIZONTAL = 1 # —
-    ORTHOGONAL = 2 # •
+    VERTICAL = 0  # |
+    HORIZONTAL = 1  # —
+    ORTHOGONAL = 2  # •
+
 
 class Block:
-    x: int
-    y: int
-    texture: None #| file? 
+    pos: pygame.Vector2
+    texture: None  # | file?
     orientation: Orientation
 
     def draw(self):
