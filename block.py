@@ -1,7 +1,9 @@
 from enum import Enum
 
 import pygame
-from pygame import Vector2
+from pygame import Surface, Vector2
+
+from draw import *
 
 
 class Orientation(Enum):
@@ -21,8 +23,16 @@ class Block:
         self._pos = pos
         self._orientation = orientation
 
-    def draw(self):
-        pass
+    def draw(self, surface: Surface):
+        if self._orientation == Orientation.VERTICAL:
+            drawCube(surface, RED, self._pos, 50)
+            drawCube(surface, RED, self._pos + Vector2(-1, -1), 50)
+        elif self._orientation == Orientation.DIAGONAL:
+            drawCube(surface, RED, self._pos, 50)
+            drawCube(surface, RED, self._pos + Vector2(1, 0), 50)
+        else:
+            drawCube(surface, RED, self._pos, 50)
+            drawCube(surface, RED, self._pos + Vector2(0, 1), 50)
 
     def rotate(self):
         pass
