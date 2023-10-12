@@ -1,7 +1,7 @@
 import pygame
 from pygame import Color, Surface, Vector2
 
-import block.block as B
+import block as B
 
 # COLORS
 WHITE = Color(255, 255, 255)
