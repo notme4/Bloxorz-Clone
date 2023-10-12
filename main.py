@@ -16,6 +16,9 @@ BLUE = Color(0, 0, 255)
 
 MOVEMENT_DELAY = 0.5
 
+Y_HAT = Vector2(-50, 25)
+X_HAT = Vector2(50, 25)
+
 
 def drawIsometricTop(
     surface: Surface,
@@ -26,6 +29,7 @@ def drawIsometricTop(
     outline: bool = False,
     outlineColor: Color = BLACK,
 ) -> None:
+    """draws a top facing square face in an isometric view"""
     p1 = Vector2(center.x - width / 2, center.y)
     p2 = Vector2(center.x, center.y + height / 2)
     p3 = Vector2(center.x + width / 2, center.y)
@@ -48,6 +52,7 @@ def drawIsometricRight(
     outline: bool = False,
     outlineColor: Color = BLACK,
 ) -> None:
+    """draws a right facing square face in an isometric view"""
     p1 = Vector2(center.x - width / 4, center.y + height / 4 - height / 2)
     p2 = Vector2(center.x - width / 4, center.y + height / 4 + height / 2)
     p3 = Vector2(center.x + width / 4, center.y - height / 4 + height / 2)
@@ -70,6 +75,7 @@ def drawIsometricLeft(
     outline: bool = False,
     outlineColor: Color = BLACK,
 ) -> None:
+    """draws a left facing square face in an isometric view"""
     p1 = Vector2(center.x + width / 4, center.y + height / 4 - height / 2)
     p2 = Vector2(center.x + width / 4, center.y + height / 4 + height / 2)
     p3 = Vector2(center.x - width / 4, center.y - height / 4 + height / 2)
@@ -91,6 +97,7 @@ def drawCube(
     outline: bool = True,
     outlineColor: Color = BLACK,
 ) -> None:
+    """draws an isometric cube"""
     drawIsometricTop(
         surface=surface,
         color=color,
@@ -120,6 +127,10 @@ def drawCube(
     )
 
 
+def CoordToScreen(Coord: Vector2) -> Vector2:
+    return Coord.x * X_HAT + Coord.y * Y_HAT
+
+
 def main():
     # setup
     pygame.init()
@@ -130,7 +141,7 @@ def main():
     running = True
     dt = 0
     # load level
-    cubePos = Vector2(100, 100)
+    cubePos = Vector2(3, 1)
     movementTimeout = 0
     # game loop
     while running:
@@ -145,23 +156,23 @@ def main():
 
         if movementTimeout < 0:
             if keys[pygame.K_d]:
-                cubePos += Vector2(50, 25)
+                cubePos += Vector2(1, 0)
                 movementTimeout = MOVEMENT_DELAY
             if keys[pygame.K_a]:
-                cubePos -= Vector2(50, 25)
+                cubePos -= Vector2(1, 0)
                 movementTimeout = MOVEMENT_DELAY
 
-            if keys[pygame.K_s]:
-                cubePos -= Vector2(50, -25)
-                movementTimeout = MOVEMENT_DELAY
             if keys[pygame.K_w]:
-                cubePos += Vector2(50, -25)
+                cubePos -= Vector2(0, 1)
+                movementTimeout = MOVEMENT_DELAY
+            if keys[pygame.K_s]:
+                cubePos += Vector2(0, 1)
                 movementTimeout = MOVEMENT_DELAY
         #    check win/fail conditions
 
         #    animate
         screen.fill(GRAY)
-        drawCube(screen, RED, cubePos, 50)
+        drawCube(screen, RED, CoordToScreen(cubePos), 50)
         pygame.display.flip()
 
         movementTimeout -= dt
