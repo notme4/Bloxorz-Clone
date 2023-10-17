@@ -1,10 +1,8 @@
 from enum import Enum
 
-import pygame
-from pygame import Surface, Vector2
-
 from draw import *
 
+type TODO = None
 
 class Orientation(Enum):
     VERTICAL = 0  # |
@@ -13,26 +11,18 @@ class Orientation(Enum):
 
 
 class Block:
-    _pos: pygame.Vector2
+    _pos: TODO
     _texture: None  # | file?
     _orientation: Orientation
 
     def __init__(
-        self, pos: Vector2, orientation: Orientation = Orientation.ANTIDIAGONAL
-    ):
+        self, pos: TODO, orientation: Orientation = Orientation.ANTIDIAGONAL
+    ) -> None:
         self._pos = pos
         self._orientation = orientation
 
-    def draw(self, surface: Surface):
-        if self._orientation == Orientation.VERTICAL:
-            drawCube(surface, RED, self._pos, 50)
-            drawCube(surface, RED, self._pos + Vector2(-1, -1), 50)
-        elif self._orientation == Orientation.DIAGONAL:
-            drawCube(surface, RED, self._pos, 50)
-            drawCube(surface, RED, self._pos + Vector2(1, 0), 50)
-        else:
-            drawCube(surface, RED, self._pos, 50)
-            drawCube(surface, RED, self._pos + Vector2(0, 1), 50)
+    def draw(self) -> None:
+        ...
 
-    def rotate(self):
-        pass
+    def rotate(self, direction: TODO) -> None:
+        ...
