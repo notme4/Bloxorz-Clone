@@ -1,0 +1,190 @@
+<Group> Block {
+  <Group> Cube0 {
+    <VertexPool> Cube0.Vertices {
+      <Vertex> 0 {
+        0 0 0
+      }
+      <Vertex> 1 {
+        0 0 1
+      }
+      <Vertex> 2 {
+        0 1 0
+      }
+      <Vertex> 3 {
+        0 1 1
+      }
+      <Vertex> 4 {
+        1 0 0
+      }
+      <Vertex> 5 {
+        1 0 1
+      }
+      <Vertex> 6 {
+        1 1 0
+      }
+      <Vertex> 7 {
+        1 1 1
+      }
+    }
+    <Polygon> Cube0.Face0 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 1 3 2 <Ref> { Cube0.Vertices } }
+    }
+    <Polygon> Cube0.Face1 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 1 5 4 <Ref> { Cube0.Vertices } }
+    }
+    <Polygon> Cube0.Face2 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 2 6 4 <Ref> { Cube0.Vertices } }
+    }
+    <Polygon> Cube0.Face3 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 4 5 7 6 <Ref> { Cube0.Vertices } }
+    }
+    <Polygon> Cube0.Face4 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 2 3 7 6 <Ref> { Cube0.Vertices } }
+    }
+    <Polygon> Cube0.Face5 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 1 3 7 5 <Ref> { Cube0.Vertices } }
+    }
+    <Line> Cube0.Line0 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 1 3 2 <Ref> { Cube0.Vertices } }
+    }
+    <Line> Cube0.Line1 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 1 5 4 <Ref> { Cube0.Vertices } }
+    }
+    <Line> Cube0.Line2 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 2 6 4 <Ref> { Cube0.Vertices } }
+    }
+    <Line> Cube0.Line3 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 4 5 7 6 <Ref> { Cube0.Vertices } }
+    }
+    <Line> Cube0.Line4 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 2 3 7 6 <Ref> { Cube0.Vertices } }
+    }
+    <Line> Cube0.Line5 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 1 3 7 5 <Ref> { Cube0.Vertices } }
+    }
+  }
+  <Group> Cube1 {
+    <VertexPool> Cube1.Vertices {
+      <Vertex> 0 {
+        1 0 0
+      }
+      <Vertex> 1 {
+        1 0 1
+      }
+      <Vertex> 2 {
+        1 1 0
+      }
+      <Vertex> 3 {
+        1 1 1
+      }
+      <Vertex> 4 {
+        2 0 0
+      }
+      <Vertex> 5 {
+        2 0 1
+      }
+      <Vertex> 6 {
+        2 1 0
+      }
+      <Vertex> 7 {
+        2 1 1
+      }
+    }
+    <Polygon> Cube1.Face0 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 1 3 2 <Ref> { Cube1.Vertices } }
+    }
+    <Polygon> Cube1.Face1 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 1 5 4 <Ref> { Cube1.Vertices } }
+    }
+    <Polygon> Cube1.Face2 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 2 6 4 <Ref> { Cube1.Vertices } }
+    }
+    <Polygon> Cube1.Face3 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 4 5 7 6 <Ref> { Cube1.Vertices } }
+    }
+    <Polygon> Cube1.Face4 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 2 3 7 6 <Ref> { Cube1.Vertices } }
+    }
+    <Polygon> Cube1.Face5 {
+      <RGBA> { 255 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 1 3 7 5 <Ref> { Cube1.Vertices } }
+    }
+    <Line> Cube1.Line0 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 1 3 2 <Ref> { Cube1.Vertices } }
+    }
+    <Line> Cube1.Line1 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 1 5 4 <Ref> { Cube1.Vertices } }
+    }
+    <Line> Cube1.Line2 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 0 2 6 4 <Ref> { Cube1.Vertices } }
+    }
+    <Line> Cube1.Line3 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 4 5 7 6 <Ref> { Cube1.Vertices } }
+    }
+    <Line> Cube1.Line4 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 2 3 7 6 <Ref> { Cube1.Vertices } }
+    }
+    <Line> Cube1.Line5 {
+      <Scalar> thick { 3 }
+      <RGBA> { 0 0 0 1 }
+      <BFace> { 1 }
+      <VertexRef> { 1 3 7 5 <Ref> { Cube1.Vertices } }
+    }
+  }
+}
