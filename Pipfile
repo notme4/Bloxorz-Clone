@@ -4,9 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pygame = "*"
+panda3d = "*"
 
 [dev-packages]
+types-panda3d = "*"
 
 [requires]
-python_version = "3.11"
+python_version = "3.12"
