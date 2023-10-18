@@ -1,5 +1,4 @@
-
-type TODO = None
+_TODO = None
 # COLORS
 WHITE = (255, 255, 255)
 LIGHTGRAY = (160, 160, 160)

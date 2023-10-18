@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0cd4a6d93d84f534d4584c27abac861a320e77230104af2fb0e35f1c4a327b00"
+            "sha256": "7298b1341e8056537a8b62a553c45deb68a8855c3ae71cb7d7a286be4f2eea2a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -29,5 +29,27 @@
             "version": "==1.10.13.post1"
         }
     },
-    "develop": {}
+    "develop": {
+        "panda3d": {
+            "hashes": [
+                "sha256:0564592ffe62a37e953b9e07c35ab8b3724dfaa340d0ed2a06c64a7324d854bb",
+                "sha256:447ae57766a44d43cd95edebf5ac54a84ae6f17bec6793346113ecdc5801f292",
+                "sha256:4ffb25f61e76046f1c0029bc8b74f7a41a0cba01f5be8672c8ba4371294936f1",
+                "sha256:cb1417a6604eda53bd3b22ea56e11ae83737522b12c56faa83542d593d1e4513",
+                "sha256:d049fd28bd858c9bd146e1ee91ba3d9cb61341577d4bf73f79ea46b18fa2236c",
+                "sha256:e9d335c53241d65c6ab7af11520dca337e809d743f05b9325186b6677cffa507"
+            ],
+            "index": "pypi",
+            "version": "==1.10.13.post1"
+        },
+        "types-panda3d": {
+            "hashes": [
+                "sha256:0b0166460a29ffe3a924bb49430cfad5dcbdce0107124352b135b154caa0cd35",
+                "sha256:da86b5238e3cc027dc427adcefd84294c6707afe72ec1311a05a9a0c04ec7918"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.7'",
+            "version": "==0.3.3"
+        }
+    }
 }

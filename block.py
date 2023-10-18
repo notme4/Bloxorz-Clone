@@ -2,7 +2,8 @@ from enum import Enum
 
 from draw import *
 
-type TODO = None
+_TODO = None
+
 
 class Orientation(Enum):
     VERTICAL = 0  # |
@@ -11,12 +12,12 @@ class Orientation(Enum):
 
 
 class Block:
-    _pos: TODO
+    _pos: _TODO
     _texture: None  # | file?
     _orientation: Orientation
 
     def __init__(
-        self, pos: TODO, orientation: Orientation = Orientation.ANTIDIAGONAL
+        self, pos: _TODO, orientation: Orientation = Orientation.ANTIDIAGONAL
     ) -> None:
         self._pos = pos
         self._orientation = orientation
@@ -24,5 +25,5 @@ class Block:
     def draw(self) -> None:
         ...
 
-    def rotate(self, direction: TODO) -> None:
+    def rotate(self, direction: _TODO) -> None:
         ...

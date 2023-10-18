@@ -1,9 +1,9 @@
-import panda3d
+import panda3d.core
 
-import block as B
+from block import *
 from draw import *
 
-type TODO = None
+_TODO = None  # TODO
 
 MOVEMENT_DELAY = 0.2
 
@@ -12,22 +12,23 @@ def main():
     # setup
     SCREENWIDTH = 720
     SCREENHEIGHT = 720
-    screen = TODO
-    clock = TODO
+    screen = _TODO
+    clock = _TODO
     running = True
     dt = 0
+
     # load level
-    blockStartPos = TODO
-    block = B.Block(blockStartPos, B.Orientation.VERTICAL)
+    blockStartPos = _TODO
+    block = Block(blockStartPos, Orientation.VERTICAL)
     movementTimeout = 0
     # game loop
     while running:
         #    check for user input
-        
+
         #    check win/fail conditions
 
         #    animate
-        pass
+        running = False
 
 
 if __name__ == "__main__":
