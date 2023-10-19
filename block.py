@@ -1,8 +1,9 @@
 from enum import Enum
 
-from draw import *
+from direct.showbase.ShowBase import ShowBase
+from panda3d.core import NodePath, Vec2
 
-_TODO = None
+from draw import *
 
 
 class Orientation(Enum):
@@ -12,18 +13,26 @@ class Orientation(Enum):
 
 
 class Block:
-    _pos: _TODO
+    _pos: Vec2
     _texture: None  # | file?
     _orientation: Orientation
 
     def __init__(
-        self, pos: _TODO, orientation: Orientation = Orientation.ANTIDIAGONAL
+        self,
+        pos: Vec2,
+        parent: NodePath,
+        orientation: Orientation = Orientation.ANTIDIAGONAL,
     ) -> None:
         self._pos = pos
         self._orientation = orientation
+        model = ShowBase.loader.load_model("models/blockModel.egg")
 
-    def draw(self) -> None:
-        ...
+        if model == None:
+            exit(1)
 
-    def rotate(self, direction: _TODO) -> None:
+        self._model = model
+
+        self._model.reparent_to(parent)
+
+    def rotate(self, direction: Vec2) -> None:
         ...
