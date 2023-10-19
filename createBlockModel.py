@@ -1,6 +1,6 @@
-from panda3d.core import Point3D
+from panda3d.core import Point3D, Vec2D
 from panda3d.egg import *
-from panda3d.egg import EggData, EggGroup, EggLine, EggPolygon, EggVertex, EggVertexPool
+from panda3d.egg import EggData, EggGroup, EggPolygon, EggVertex, EggVertexPool
 
 from draw import *
 
@@ -32,29 +32,41 @@ def createCube(center: Point3D, sideLength: float, name: str):
 
     faceVertices = [
         [vertices[0], vertices[1], vertices[3], vertices[2]],
-        [vertices[0], vertices[1], vertices[5], vertices[4]],
-        [vertices[0], vertices[2], vertices[6], vertices[4]],
-        [vertices[4], vertices[5], vertices[7], vertices[6]],
         [vertices[2], vertices[3], vertices[7], vertices[6]],
-        [vertices[1], vertices[3], vertices[7], vertices[5]],
+        [vertices[6], vertices[7], vertices[5], vertices[4]],
+        [vertices[4], vertices[5], vertices[1], vertices[0]],
+        [vertices[2], vertices[6], vertices[4], vertices[0]],
+        [vertices[7], vertices[3], vertices[1], vertices[5]],
+    ]
+
+    UVBase = [
+        Vec2D(0.015625, 0.015625),
+        Vec2D(0.015625, 0.109375),
+        Vec2D(0.109375, 0.109375),
+        Vec2D(0.109375, 0.015625),
+    ]
+    UVOffset = [
+        Vec2D(0.125, 0),
+        Vec2D(0.125, 0.125),
+        Vec2D(0.125, 0.250),
+        Vec2D(0.125, 0.375),
+        Vec2D(0.000, 0.250),
+        Vec2D(0.250, 0.250),
     ]
 
     for i in range(0, 6):
         face = EggPolygon(name + ".Face" + str(i))
-        face.set_color(RED)
+        face.add_texture(EggTexture("BlockTexture", "models/BlockTexture-V5.png"))
         face.set_bface_flag(True)
-        for vert in faceVertices[i]:
-            face.add_vertex(vert)
-        cube.add_child(face)
 
-    for i in range(0, 6):
-        line = EggLine(name + ".Line" + str(i))
-        line.set_color(BLACK)
-        line.set_bface_flag(True)
-        line.set_thick(3)
-        for vert in faceVertices[i]:
-            line.add_vertex(vert)
-        cube.add_child(line)
+        faceVerticesPool = EggVertexPool(face.name + ".Vertices")
+        for j, vertBase in enumerate(faceVertices[i], 0):
+            vert = EggVertex(vertBase)
+            faceVerticesPool.add_vertex(vert)
+            vert.set_uv(UVBase[j] + UVOffset[i])
+            face.add_vertex(vert)
+        cube.add_child(faceVerticesPool)
+        cube.add_child(face)
 
     return cube
 
