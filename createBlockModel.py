@@ -1,4 +1,4 @@
-from panda3d.core import Point3D, Vec2D
+from panda3d.core import Mat4D, Point3D, Vec2D
 from panda3d.egg import *
 from panda3d.egg import EggData, EggGroup, EggPolygon, EggVertex, EggVertexPool
 
@@ -72,18 +72,26 @@ def createCube(center: Point3D, sideLength: float, name: str):
 
 
 def createBlockModel():
+    from math import cos, sin
+
     block = EggGroup("Block")
 
-    cube0 = createCube(Point3D(0.5, 0.5, 0.5), 1, "Cube0")
+    cube0 = createCube(Point3D(0.5, 0, 0), 1, "Cube0")
     block.add_child(cube0)
 
-    cube1 = createCube(Point3D(1.5, 0.5, 0.5), 1, "Cube1")
+    cube1 = createCube(Point3D(-0.5, 0, 0), 1, "Cube1")
     block.add_child(cube1)
 
     data = EggData()
     data.add_child(block)
 
     data.writeEgg("models/blockModel.egg")
+
+
+def deg2Rad(deg: float):
+    from math import pi
+
+    return pi * deg / 180
 
 
 if __name__ == "__main__":

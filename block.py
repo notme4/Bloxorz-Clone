@@ -1,38 +1,121 @@
 from enum import Enum
+from math import pi
 
-from direct.showbase.ShowBase import ShowBase
-from panda3d.core import NodePath, Vec2
+from direct.interval.IntervalGlobal import FunctionInterval, Sequence
+from direct.interval.LerpInterval import LerpHprInterval
+from panda3d.core import Mat4D, NodePath, Vec3
 
 from draw import *
 
+STARTING_ANGLE = 0
+STARTING_ANGLE_RAD = pi * STARTING_ANGLE / 180
+
 
 class Orientation(Enum):
-    VERTICAL = 0  # |
-    DIAGONAL = 1  # \
-    ANTIDIAGONAL = 2  # /
+    VERTICAL = 0
+    HORIZONTAL = 1
+    FORWARD = 2
 
 
 class Block:
-    _pos: Vec2
-    _texture: None  # | file?
+    _pos: Vec3
     _orientation: Orientation
+    _model: NodePath
 
     def __init__(
         self,
-        pos: Vec2,
-        parent: NodePath,
-        orientation: Orientation = Orientation.ANTIDIAGONAL,
+        blockModel: NodePath,
+        orientation: Orientation = Orientation.HORIZONTAL,
     ) -> None:
-        self._pos = pos
+        self._pos = Vec3(0, 0, 0)
         self._orientation = orientation
-        model = ShowBase.loader.load_model("models/blockModel.egg")
+        self._model = blockModel
+        self._model.set_hpr((STARTING_ANGLE, 0, 0))
 
-        if model == None:
-            exit(1)
+    def rotate(self, direction: str) -> Sequence:
+        from math import cos, sin
 
-        self._model = model
+        print("rotate " + str(direction))
 
-        self._model.reparent_to(parent)
+        top = self._model.get_top()
+        pivotPoint = top.attach_new_node("pivotPoint")
 
-    def rotate(self, direction: Vec2) -> None:
-        ...
+        if direction == "w":
+            if self._orientation == Orientation.VERTICAL:
+                self._orientation = Orientation.FORWARD
+                pivotPoint.set_pos(self._pos + (0, 0.5, -0.5))
+                self._pos += (0, 1.5, 0)
+
+            elif self._orientation == Orientation.HORIZONTAL:
+                pivotPoint.set_pos(self._pos + (0, 0.5, -0.5))
+                self._pos += (0, 1, 0)
+
+            elif self._orientation == Orientation.FORWARD:
+                self._orientation = Orientation.VERTICAL
+                pivotPoint.set_pos(self._pos + (0, 1, -0.5))
+                self._pos += (0, 1.5, 0)
+
+            hpr = (0, -90, 0)
+
+        elif direction == "s":
+            if self._orientation == Orientation.VERTICAL:
+                self._orientation = Orientation.FORWARD
+                pivotPoint.set_pos(self._pos + (0, -0.5, -0.5))
+                self._pos += (0, -1.5, 0)
+
+            elif self._orientation == Orientation.HORIZONTAL:
+                pivotPoint.set_pos(self._pos + (0, -0.5, -0.5))
+                self._pos += (0, -1, 0)
+
+            elif self._orientation == Orientation.FORWARD:
+                self._orientation = Orientation.VERTICAL
+                pivotPoint.set_pos(self._pos + (0, -1, -0.5))
+                self._pos += (0, -1.5, 0)
+
+            hpr = (0, 90, 0)
+
+        elif direction == "a":
+            if self._orientation == Orientation.VERTICAL:
+                self._orientation = Orientation.HORIZONTAL
+                pivotPoint.set_pos(self._pos + (-0.5, 0, -0.5))
+                self._pos += (-1.5, 0, 0)
+
+            elif self._orientation == Orientation.HORIZONTAL:
+                self._orientation = Orientation.VERTICAL
+                pivotPoint.set_pos(self._pos + (-1, 0, -0.5))
+                self._pos += (-1.5, 0, 0)
+
+            elif self._orientation == Orientation.FORWARD:
+                pivotPoint.set_pos(self._pos + (-0.5, 0, -0.5))
+                self._pos += (-1, 0, 0)
+
+            hpr = (0, 0, -90)
+
+        elif direction == "d":
+            if self._orientation == Orientation.VERTICAL:
+                self._orientation = Orientation.HORIZONTAL
+                pivotPoint.set_pos(self._pos + (0.5, 0, -0.5))
+                self._pos += (1.5, 0, 0)
+
+            elif self._orientation == Orientation.HORIZONTAL:
+                self._orientation = Orientation.VERTICAL
+                pivotPoint.set_pos(self._pos + (1, 0, -0.5))
+                self._pos += (1.5, 0, 0)
+
+            elif self._orientation == Orientation.FORWARD:
+                pivotPoint.set_pos(self._pos + (0.5, 0, -0.5))
+                self._pos += (1, 0, 0)
+
+            hpr = (0, 0, 90)
+
+        else:
+            print("direction invalid")
+            hpr = (0, 0, 0)
+
+        self._model.wrt_reparent_to(pivotPoint)
+        return Sequence(
+            LerpHprInterval(pivotPoint, 0.5, hpr),
+            FunctionInterval(self._model.get_top().flatten_medium),
+        )
+
+        # self._model.reparent_to(parent)
