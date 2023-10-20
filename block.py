@@ -3,7 +3,7 @@ from math import pi
 
 from direct.interval.IntervalGlobal import FunctionInterval, Sequence
 from direct.interval.LerpInterval import LerpHprInterval
-from panda3d.core import Mat4D, NodePath, Vec3
+from panda3d.core import NodePath, Vec3
 
 from draw import *
 
@@ -33,8 +33,6 @@ class Block:
         self._model.set_hpr((STARTING_ANGLE, 0, 0))
 
     def rotate(self, direction: str) -> Sequence:
-        from math import cos, sin
-
         print("rotate " + str(direction))
 
         top = self._model.get_top()

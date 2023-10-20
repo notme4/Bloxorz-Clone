@@ -1,5 +1,3 @@
-import panda3d.core as core
-import panda3d.egg as egg
 from direct.interval.Interval import Interval
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
@@ -10,7 +8,7 @@ from draw import *
 
 class App(ShowBase):
     block: Block
-    anim: Interval | None = None
+    anim: Interval | Sequence | None = None
 
     def __init__(self) -> None:
         super().__init__()
@@ -69,7 +67,4 @@ def main():
 
 
 if __name__ == "__main__":
-    import createBlockModel
-
-    createBlockModel.createBlockModel()
     main()
