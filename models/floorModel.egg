@@ -1,0 +1,323 @@
+<Group> Block {
+  <Group> Cube0 {
+    <VertexPool> Cube0.Vertices {
+      <Vertex> 0 {
+        0 -0.5 -0.5
+      }
+      <Vertex> 1 {
+        0 -0.5 0.5
+      }
+      <Vertex> 2 {
+        0 0.5 -0.5
+      }
+      <Vertex> 3 {
+        0 0.5 0.5
+      }
+      <Vertex> 4 {
+        1 -0.5 -0.5
+      }
+      <Vertex> 5 {
+        1 -0.5 0.5
+      }
+      <Vertex> 6 {
+        1 0.5 -0.5
+      }
+      <Vertex> 7 {
+        1 0.5 0.5
+      }
+    }
+    <VertexPool> Cube0.Face0.Vertices {
+      <Vertex> 0 {
+        0 -0.5 -0.5
+        <UV> { 0.140625 0.015625 }
+      }
+      <Vertex> 1 {
+        0 -0.5 0.5
+        <UV> { 0.140625 0.109375 }
+      }
+      <Vertex> 2 {
+        0 0.5 0.5
+        <UV> { 0.234375 0.109375 }
+      }
+      <Vertex> 3 {
+        0 0.5 -0.5
+        <UV> { 0.234375 0.015625 }
+      }
+    }
+    <Polygon> Cube0.Face0 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube0.Face0.Vertices } }
+    }
+    <VertexPool> Cube0.Face1.Vertices {
+      <Vertex> 0 {
+        0 0.5 -0.5
+        <UV> { 0.140625 0.140625 }
+      }
+      <Vertex> 1 {
+        0 0.5 0.5
+        <UV> { 0.140625 0.234375 }
+      }
+      <Vertex> 2 {
+        1 0.5 0.5
+        <UV> { 0.234375 0.234375 }
+      }
+      <Vertex> 3 {
+        1 0.5 -0.5
+        <UV> { 0.234375 0.140625 }
+      }
+    }
+    <Polygon> Cube0.Face1 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube0.Face1.Vertices } }
+    }
+    <VertexPool> Cube0.Face2.Vertices {
+      <Vertex> 0 {
+        1 0.5 -0.5
+        <UV> { 0.140625 0.265625 }
+      }
+      <Vertex> 1 {
+        1 0.5 0.5
+        <UV> { 0.140625 0.359375 }
+      }
+      <Vertex> 2 {
+        1 -0.5 0.5
+        <UV> { 0.234375 0.359375 }
+      }
+      <Vertex> 3 {
+        1 -0.5 -0.5
+        <UV> { 0.234375 0.265625 }
+      }
+    }
+    <Polygon> Cube0.Face2 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube0.Face2.Vertices } }
+    }
+    <VertexPool> Cube0.Face3.Vertices {
+      <Vertex> 0 {
+        1 -0.5 -0.5
+        <UV> { 0.140625 0.390625 }
+      }
+      <Vertex> 1 {
+        1 -0.5 0.5
+        <UV> { 0.140625 0.484375 }
+      }
+      <Vertex> 2 {
+        0 -0.5 0.5
+        <UV> { 0.234375 0.484375 }
+      }
+      <Vertex> 3 {
+        0 -0.5 -0.5
+        <UV> { 0.234375 0.390625 }
+      }
+    }
+    <Polygon> Cube0.Face3 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube0.Face3.Vertices } }
+    }
+    <VertexPool> Cube0.Face4.Vertices {
+      <Vertex> 0 {
+        0 0.5 -0.5
+        <UV> { 0.015625 0.265625 }
+      }
+      <Vertex> 1 {
+        1 0.5 -0.5
+        <UV> { 0.015625 0.359375 }
+      }
+      <Vertex> 2 {
+        1 -0.5 -0.5
+        <UV> { 0.109375 0.359375 }
+      }
+      <Vertex> 3 {
+        0 -0.5 -0.5
+        <UV> { 0.109375 0.265625 }
+      }
+    }
+    <Polygon> Cube0.Face4 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube0.Face4.Vertices } }
+    }
+    <VertexPool> Cube0.Face5.Vertices {
+      <Vertex> 0 {
+        1 0.5 0.5
+        <UV> { 0.265625 0.265625 }
+      }
+      <Vertex> 1 {
+        0 0.5 0.5
+        <UV> { 0.265625 0.359375 }
+      }
+      <Vertex> 2 {
+        0 -0.5 0.5
+        <UV> { 0.359375 0.359375 }
+      }
+      <Vertex> 3 {
+        1 -0.5 0.5
+        <UV> { 0.359375 0.265625 }
+      }
+    }
+    <Polygon> Cube0.Face5 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube0.Face5.Vertices } }
+    }
+  }
+  <Group> Cube1 {
+  <Collide> { Polyset keep descend }
+    <VertexPool> Cube1.Vertices {
+      <Vertex> 0 {
+        -1 -0.5 -0.5
+      }
+      <Vertex> 1 {
+        -1 -0.5 0.5
+      }
+      <Vertex> 2 {
+        -1 0.5 -0.5
+      }
+      <Vertex> 3 {
+        -1 0.5 0.5
+      }
+      <Vertex> 4 {
+        0 -0.5 -0.5
+      }
+      <Vertex> 5 {
+        0 -0.5 0.5
+      }
+      <Vertex> 6 {
+        0 0.5 -0.5
+      }
+      <Vertex> 7 {
+        0 0.5 0.5
+      }
+    }
+    <VertexPool> Cube1.Face0.Vertices {
+      <Vertex> 0 {
+        -1 -0.5 -0.5
+        <UV> { 0.140625 0.015625 }
+      }
+      <Vertex> 1 {
+        -1 -0.5 0.5
+        <UV> { 0.140625 0.109375 }
+      }
+      <Vertex> 2 {
+        -1 0.5 0.5
+        <UV> { 0.234375 0.109375 }
+      }
+      <Vertex> 3 {
+        -1 0.5 -0.5
+        <UV> { 0.234375 0.015625 }
+      }
+    }
+    <Polygon> Cube1.Face0 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube1.Face0.Vertices } }
+    }
+    <VertexPool> Cube1.Face1.Vertices {
+      <Vertex> 0 {
+        -1 0.5 -0.5
+        <UV> { 0.140625 0.140625 }
+      }
+      <Vertex> 1 {
+        -1 0.5 0.5
+        <UV> { 0.140625 0.234375 }
+      }
+      <Vertex> 2 {
+        0 0.5 0.5
+        <UV> { 0.234375 0.234375 }
+      }
+      <Vertex> 3 {
+        0 0.5 -0.5
+        <UV> { 0.234375 0.140625 }
+      }
+    }
+    <Polygon> Cube1.Face1 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube1.Face1.Vertices } }
+    }
+    <VertexPool> Cube1.Face2.Vertices {
+      <Vertex> 0 {
+        0 0.5 -0.5
+        <UV> { 0.140625 0.265625 }
+      }
+      <Vertex> 1 {
+        0 0.5 0.5
+        <UV> { 0.140625 0.359375 }
+      }
+      <Vertex> 2 {
+        0 -0.5 0.5
+        <UV> { 0.234375 0.359375 }
+      }
+      <Vertex> 3 {
+        0 -0.5 -0.5
+        <UV> { 0.234375 0.265625 }
+      }
+    }
+    <Polygon> Cube1.Face2 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube1.Face2.Vertices } }
+    }
+    <VertexPool> Cube1.Face3.Vertices {
+      <Vertex> 0 {
+        0 -0.5 -0.5
+        <UV> { 0.140625 0.390625 }
+      }
+      <Vertex> 1 {
+        0 -0.5 0.5
+        <UV> { 0.140625 0.484375 }
+      }
+      <Vertex> 2 {
+        -1 -0.5 0.5
+        <UV> { 0.234375 0.484375 }
+      }
+      <Vertex> 3 {
+        -1 -0.5 -0.5
+        <UV> { 0.234375 0.390625 }
+      }
+    }
+    <Polygon> Cube1.Face3 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube1.Face3.Vertices } }
+    }
+    <VertexPool> Cube1.Face4.Vertices {
+      <Vertex> 0 {
+        -1 0.5 -0.5
+        <UV> { 0.015625 0.265625 }
+      }
+      <Vertex> 1 {
+        0 0.5 -0.5
+        <UV> { 0.015625 0.359375 }
+      }
+      <Vertex> 2 {
+        0 -0.5 -0.5
+        <UV> { 0.109375 0.359375 }
+      }
+      <Vertex> 3 {
+        -1 -0.5 -0.5
+        <UV> { 0.109375 0.265625 }
+      }
+    }
+    <Polygon> Cube1.Face4 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube1.Face4.Vertices } }
+    }
+    <VertexPool> Cube1.Face5.Vertices {
+      <Vertex> 0 {
+        0 0.5 0.5
+        <UV> { 0.265625 0.265625 }
+      }
+      <Vertex> 1 {
+        -1 0.5 0.5
+        <UV> { 0.265625 0.359375 }
+      }
+      <Vertex> 2 {
+        -1 -0.5 0.5
+        <UV> { 0.359375 0.359375 }
+      }
+      <Vertex> 3 {
+        0 -0.5 0.5
+        <UV> { 0.359375 0.265625 }
+      }
+    }
+    <Polygon> Cube1.Face5 {
+      <BFace> { 1 }
+      <VertexRef> { 0 1 2 3 <Ref> { Cube1.Face5.Vertices } }
+    }
+  }
+}
