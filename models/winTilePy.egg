@@ -1,0 +1,195 @@
+<Texture> BlockTexture {
+  "models/FloorTexture.png"
+}
+<Material> Floor.Mat {
+  <Scalar> baser { 255 }
+  <Scalar> baseg { 0 }
+  <Scalar> baseb { 0 }
+  <Scalar> ambr { 255 }
+  <Scalar> ambg { 0 }
+  <Scalar> ambb { 0 }
+  <Scalar> emitr { 0 }
+  <Scalar> emitg { 0 }
+  <Scalar> emitb { 0 }
+  <Scalar> specr { 255 }
+  <Scalar> specg { 0 }
+  <Scalar> specb { 0 }
+  <Scalar> shininess { 0.5 }
+  <Scalar> roughness { 0.5 }
+  <Scalar> metallic { 0 }
+  <Scalar> ior { 1.45 }
+  <Scalar> local { 1 }
+}
+<Group> Floor {
+  <Collide> { Polyset descend keep }
+  <VertexPool> Floor.Vertices {
+    <Vertex> 0 {
+      -0.5 -0.5 -0.5
+    }
+    <Vertex> 1 {
+      -0.5 -0.5 0.5
+    }
+    <Vertex> 2 {
+      -0.5 0.5 -0.5
+    }
+    <Vertex> 3 {
+      -0.5 0.5 0.5
+    }
+    <Vertex> 4 {
+      0.5 -0.5 -0.5
+    }
+    <Vertex> 5 {
+      0.5 -0.5 0.5
+    }
+    <Vertex> 6 {
+      0.5 0.5 -0.5
+    }
+    <Vertex> 7 {
+      0.5 0.5 0.5
+    }
+  }
+  <VertexPool> Floor.Face0.Vertices {
+    <Vertex> 0 {
+      -0.5 -0.5 -0.5
+      <UV> { 0.140625 0.015625 }
+    }
+    <Vertex> 1 {
+      -0.5 -0.5 0.5
+      <UV> { 0.140625 0.109375 }
+    }
+    <Vertex> 2 {
+      -0.5 0.5 0.5
+      <UV> { 0.234375 0.109375 }
+    }
+    <Vertex> 3 {
+      -0.5 0.5 -0.5
+      <UV> { 0.234375 0.015625 }
+    }
+  }
+  <Polygon> Floor.Face0 {
+    <TRef> { BlockTexture }
+    <MRef> { Floor.Mat }
+    <BFace> { 1 }
+    <VertexRef> { 0 1 2 3 <Ref> { Floor.Face0.Vertices } }
+  }
+  <VertexPool> Floor.Face1.Vertices {
+    <Vertex> 0 {
+      -0.5 0.5 -0.5
+      <UV> { 0.140625 0.140625 }
+    }
+    <Vertex> 1 {
+      -0.5 0.5 0.5
+      <UV> { 0.140625 0.234375 }
+    }
+    <Vertex> 2 {
+      0.5 0.5 0.5
+      <UV> { 0.234375 0.234375 }
+    }
+    <Vertex> 3 {
+      0.5 0.5 -0.5
+      <UV> { 0.234375 0.140625 }
+    }
+  }
+  <Polygon> Floor.Face1 {
+    <TRef> { BlockTexture }
+    <MRef> { Floor.Mat }
+    <BFace> { 1 }
+    <VertexRef> { 0 1 2 3 <Ref> { Floor.Face1.Vertices } }
+  }
+  <VertexPool> Floor.Face2.Vertices {
+    <Vertex> 0 {
+      0.5 0.5 -0.5
+      <UV> { 0.140625 0.265625 }
+    }
+    <Vertex> 1 {
+      0.5 0.5 0.5
+      <UV> { 0.140625 0.359375 }
+    }
+    <Vertex> 2 {
+      0.5 -0.5 0.5
+      <UV> { 0.234375 0.359375 }
+    }
+    <Vertex> 3 {
+      0.5 -0.5 -0.5
+      <UV> { 0.234375 0.265625 }
+    }
+  }
+  <Polygon> Floor.Face2 {
+    <TRef> { BlockTexture }
+    <MRef> { Floor.Mat }
+    <BFace> { 1 }
+    <VertexRef> { 0 1 2 3 <Ref> { Floor.Face2.Vertices } }
+  }
+  <VertexPool> Floor.Face3.Vertices {
+    <Vertex> 0 {
+      0.5 -0.5 -0.5
+      <UV> { 0.140625 0.390625 }
+    }
+    <Vertex> 1 {
+      0.5 -0.5 0.5
+      <UV> { 0.140625 0.484375 }
+    }
+    <Vertex> 2 {
+      -0.5 -0.5 0.5
+      <UV> { 0.234375 0.484375 }
+    }
+    <Vertex> 3 {
+      -0.5 -0.5 -0.5
+      <UV> { 0.234375 0.390625 }
+    }
+  }
+  <Polygon> Floor.Face3 {
+    <TRef> { BlockTexture }
+    <MRef> { Floor.Mat }
+    <BFace> { 1 }
+    <VertexRef> { 0 1 2 3 <Ref> { Floor.Face3.Vertices } }
+  }
+  <VertexPool> Floor.Face4.Vertices {
+    <Vertex> 0 {
+      -0.5 0.5 -0.5
+      <UV> { 0.015625 0.265625 }
+    }
+    <Vertex> 1 {
+      0.5 0.5 -0.5
+      <UV> { 0.015625 0.359375 }
+    }
+    <Vertex> 2 {
+      0.5 -0.5 -0.5
+      <UV> { 0.109375 0.359375 }
+    }
+    <Vertex> 3 {
+      -0.5 -0.5 -0.5
+      <UV> { 0.109375 0.265625 }
+    }
+  }
+  <Polygon> Floor.Face4 {
+    <TRef> { BlockTexture }
+    <MRef> { Floor.Mat }
+    <BFace> { 1 }
+    <VertexRef> { 0 1 2 3 <Ref> { Floor.Face4.Vertices } }
+  }
+  <VertexPool> Floor.Face5.Vertices {
+    <Vertex> 0 {
+      0.5 0.5 0.5
+      <UV> { 0.265625 0.265625 }
+    }
+    <Vertex> 1 {
+      -0.5 0.5 0.5
+      <UV> { 0.265625 0.359375 }
+    }
+    <Vertex> 2 {
+      -0.5 -0.5 0.5
+      <UV> { 0.359375 0.359375 }
+    }
+    <Vertex> 3 {
+      0.5 -0.5 0.5
+      <UV> { 0.359375 0.265625 }
+    }
+  }
+  <Polygon> Floor.Face5 {
+    <TRef> { BlockTexture }
+    <MRef> { Floor.Mat }
+    <BFace> { 1 }
+    <VertexRef> { 0 1 2 3 <Ref> { Floor.Face5.Vertices } }
+  }
+}
