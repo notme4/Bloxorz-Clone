@@ -27,8 +27,8 @@ class Level:
         self.floorPlan = self.loadLevel(floorPlanPath)
         self.winTile = winTile
 
-        self.win_Collider = None
-        self.startPos = None
+        self.win_Collider = None  # type: ignore
+        self.startPos = None  # type: ignore
 
         self.floor = NodePath("Floor")
         for i in range(20):

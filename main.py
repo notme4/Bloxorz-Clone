@@ -91,7 +91,8 @@ class App(ShowBase):
         blockTiles = list(map(lambda a: self.level.floorPlan[a], blockTilePos))
         if TileEnum.AIR in blockTiles:
             self.state = GameState.FAIL
-            self.block.fall()
+            self.anim = self.block.fall(blockTiles)
+            self.anim.start()
             print("fall")
         elif len(blockTiles) == 1 and blockTiles[0] == TileEnum.WIN:
             self.state = GameState.WIN
