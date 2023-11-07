@@ -111,7 +111,7 @@ class App(ShowBase):
 
         # adding Ambient light to the renderer
         alight = AmbientLight("alight")
-        alight.setColor((0.08, 0.08, 0.08, 1))
+        alight.setColor((1, 1, 1, 1))
         alnp = self.render.attachNewNode(alight)
         self.render.setLight(alnp)
 

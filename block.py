@@ -117,7 +117,7 @@ class Block:
 
         duration = 0.25
         self.animation = True
-        self.rotDir = Vec3(hpr) / duration
+        self.rotDir = Vec3(hpr) / 90
         return Sequence(
             LerpHprInterval(pivotPoint, duration, hpr),
             FunctionInterval(self.model.get_ancestor(1).flatten_medium),
@@ -130,18 +130,27 @@ class Block:
         self.model.get_ancestor(1).flatten_medium()
         top = self.model.get_ancestor(1)
         pivotPoint = top.attach_new_node("pivotPoint")
-        pivotPoint.set_pos(self.pos)
-        self.model.wrt_reparent_to(pivotPoint)
 
         if tiles != list(filter(lambda t: t == TileEnum.AIR, tiles)):
-            pass
+            pivotPoint.set_pos(self.pos - (0, 0, 1))
+            hpr = self.rotDir * 90
+            dur = 0.25
+        else:
+            pivotPoint.set_pos(self.pos - (0, 0, 1) - self.rotDir)
+            hpr = self.rotDir * 45
+            dur = 0.125
 
-        dur = 0.25
-        hpr = self.rotDir * dur
         dpos = Vec3(0, 0, -10) * dur
-        pos = self.pos + dpos
+
+        self.model.wrt_reparent_to(pivotPoint)
         return Sequence(
-            LerpPosHprInterval(pivotPoint, dur, pos, hpr),
+            LerpHprInterval(pivotPoint, dur, hpr),
+            LerpPosHprInterval(
+                pivotPoint,
+                dur * 100,
+                lambda: self.model.get_pos() + dpos * 100,
+                hpr * 100,
+            ),
             FunctionInterval(self.model.get_ancestor(1).flatten_medium),
             FunctionInterval(
                 lambda: self.on_animation_complete(self.orientation, dpos)
