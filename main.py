@@ -3,7 +3,7 @@ from enum import Enum
 from direct.interval.Interval import Interval
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
-from panda3d.core import AmbientLight, PointLight
+from panda3d.core import AmbientLight, DirectionalLight, PointLight
 
 from block import *
 from draw import *
@@ -32,7 +32,7 @@ class App(ShowBase):
         super().__init__()
         self.set_background_color(0, 0, 0, 1)
 
-        self.setupLight(Vec3(20, 0, 20))
+        self.setupLight()
         self.task_mgr.add(self.setupCamera, "setupCamera")
 
         self.task_mgr.add(self.update, "update")
@@ -100,20 +100,13 @@ class App(ShowBase):
 
         return task.cont
 
-    def setupLight(self, pos: Vec3):
-        # adding Point light to the renderer
-        plight = PointLight("plight")
-        plight.setColor((1, 1, 1, 1))
-        plnp = self.render.attachNewNode(plight)
-        plnp.setPos(pos)
-        # plight.setAttenuation((0, 0, 1))
-        self.render.setLight(plnp)
-
-        # adding Ambient light to the renderer
-        alight = AmbientLight("alight")
-        alight.setColor((1, 1, 1, 1))
-        alnp = self.render.attachNewNode(alight)
-        self.render.setLight(alnp)
+    def setupLight(self):
+        dlight = DirectionalLight("dlight")
+        dlight.setShadowCaster(True)
+        dlight.setColor((1, 1, 1, 1))
+        dlnp = self.render.attachNewNode(dlight)
+        dlnp.setHpr(0, -60, 0)
+        self.render.setLight(dlnp)
 
     def setupCamera(self, task: Task.Task):
         # angleDegrees: float = -5.0
