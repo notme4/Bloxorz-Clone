@@ -34,80 +34,84 @@ class Block:
 
         top = self.model.get_ancestor(1)
         pivotPoint = top.attach_new_node("pivotPoint")
+        orientation = self.orientation
         if direction == "w":
             if self.orientation == Orientation.VERTICAL:
-                self.orientation = Orientation.FORWARD
+                orientation = Orientation.FORWARD
                 pivotPoint.set_pos(self.pos + (0, 0.5, -1))
-                self.pos += (0, 1.5, 0)
+                pos = Vec3(0, 1.5, 0)
 
             elif self.orientation == Orientation.HORIZONTAL:
                 pivotPoint.set_pos(self.pos + (0, 0.5, -1))
-                self.pos += (0, 1, 0)
+                pos = Vec3(0, 1, 0)
 
             elif self.orientation == Orientation.FORWARD:
-                self.orientation = Orientation.VERTICAL
+                orientation = Orientation.VERTICAL
                 pivotPoint.set_pos(self.pos + (0, 1, -1))
-                self.pos += (0, 1.5, 0)
+                pos = Vec3(0, 1.5, 0)
 
             hpr = (0, -90, 0)
 
         elif direction == "s":
             if self.orientation == Orientation.VERTICAL:
-                self.orientation = Orientation.FORWARD
+                orientation = Orientation.FORWARD
                 pivotPoint.set_pos(self.pos + (0, -0.5, -1))
-                self.pos += (0, -1.5, 0)
+                pos = Vec3(0, -1.5, 0)
 
             elif self.orientation == Orientation.HORIZONTAL:
                 pivotPoint.set_pos(self.pos + (0, -0.5, -1))
-                self.pos += (0, -1, 0)
+                pos = Vec3(0, -1, 0)
 
             elif self.orientation == Orientation.FORWARD:
-                self.orientation = Orientation.VERTICAL
+                orientation = Orientation.VERTICAL
                 pivotPoint.set_pos(self.pos + (0, -1, -1))
-                self.pos += (0, -1.5, 0)
+                pos = Vec3(0, -1.5, 0)
 
             hpr = (0, 90, 0)
 
         elif direction == "a":
             if self.orientation == Orientation.VERTICAL:
-                self.orientation = Orientation.HORIZONTAL
+                orientation = Orientation.HORIZONTAL
                 pivotPoint.set_pos(self.pos + (-0.5, 0, -1))
-                self.pos += (-1.5, 0, 0)
+                pos = Vec3(-1.5, 0, 0)
 
             elif self.orientation == Orientation.HORIZONTAL:
-                self.orientation = Orientation.VERTICAL
+                orientation = Orientation.VERTICAL
                 pivotPoint.set_pos(self.pos + (-1, 0, -1))
-                self.pos += (-1.5, 0, 0)
+                pos = Vec3(-1.5, 0, 0)
 
             elif self.orientation == Orientation.FORWARD:
                 pivotPoint.set_pos(self.pos + (-0.5, 0, -1))
-                self.pos += (-1, 0, 0)
+                pos = Vec3(-1, 0, 0)
 
             hpr = (0, 0, -90)
 
         elif direction == "d":
             if self.orientation == Orientation.VERTICAL:
-                self.orientation = Orientation.HORIZONTAL
+                orientation = Orientation.HORIZONTAL
                 pivotPoint.set_pos(self.pos + (0.5, 0, -1))
-                self.pos += (1.5, 0, 0)
+                pos = Vec3(1.5, 0, 0)
 
             elif self.orientation == Orientation.HORIZONTAL:
-                self.orientation = Orientation.VERTICAL
+                orientation = Orientation.VERTICAL
                 pivotPoint.set_pos(self.pos + (1, 0, -1))
-                self.pos += (1.5, 0, 0)
+                pos = Vec3(1.5, 0, 0)
 
             elif self.orientation == Orientation.FORWARD:
                 pivotPoint.set_pos(self.pos + (0.5, 0, -1))
-                self.pos += (1, 0, 0)
+                pos = Vec3(1, 0, 0)
 
             hpr = (0, 0, 90)
 
         else:
             print("direction invalid")
             hpr = (0, 0, 0)
+            pos = Vec3(0, 0, 0)
 
         self.model.wrt_reparent_to(pivotPoint)
-        animation_complete_handler = FunctionInterval(self.on_animation_complete)
+        animation_complete_handler = FunctionInterval(
+            lambda: self.on_animation_complete(pos, orientation)
+        )
         self.animation = True
         return Sequence(
             LerpHprInterval(pivotPoint, 0.25, hpr),
@@ -117,7 +121,12 @@ class Block:
 
         # self._model.reparent_to(parent)
 
-    def on_animation_complete(self):
+    def fall(self):
+        pass
+
+    def on_animation_complete(self, pos: Vec3, orientation: Orientation) -> None:
+        self.pos += pos
+        self.orientation = orientation
         self.animation = False
 
     def addPos(self, position: Vec3):

@@ -1,3 +1,5 @@
+from enum import Enum
+
 from direct.interval.Interval import Interval
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
@@ -12,10 +14,17 @@ from level import *
 MOVEMENT_DELAY = 0.1
 
 
+class GameState(Enum):
+    PLAYING = 0
+    FAIL = 1
+    WIN = 2
+    PAUSE = 3  # currently unused
+
+
 class App(ShowBase):
     block: Block
     anim: Interval | Sequence | None = None
-    winner: bool
+    state: GameState
     floorTile: NodePath
     level: Level
 
@@ -29,6 +38,8 @@ class App(ShowBase):
         self.task_mgr.add(self.update, "update")
 
         self.loadLevel("levels/test.txt")
+
+        self.state = GameState.PLAYING
 
         self.accept("w", self.rotate, ["w"])
         self.accept("s", self.rotate, ["s"])
@@ -45,8 +56,6 @@ class App(ShowBase):
         return model
 
     def loadLevel(self, level: str):
-        self.winner = False
-
         floorTile = self.loadModel("models/baseTilePy.egg")
         winTile = self.loadModel("models/winTilePy.egg")
 
@@ -62,6 +71,7 @@ class App(ShowBase):
         self.block.model.reparent_to(self.render)
 
     def resetLevel(self):
+        self.state = GameState.PLAYING
         self.block.model.remove_node()
         self.loadBlock()
 
@@ -69,15 +79,22 @@ class App(ShowBase):
         if self.anim and not self.anim.isStopped():
             self.anim.finish()
             return
+        if self.state != GameState.PLAYING:
+            return
         self.anim = self.block.rotate(direction[0])
         self.anim.start()
 
     def update(self, task: Task.Task):
+        if self.anim and not self.anim.isStopped():
+            return task.cont
         blockTilePos = self.block.getTilePositions()
         blockTiles = list(map(lambda a: self.level.floorPlan[a], blockTilePos))
         if TileEnum.AIR in blockTiles:
+            self.state = GameState.FAIL
+            self.block.fall()
             print("fall")
         elif len(blockTiles) == 1 and blockTiles[0] == TileEnum.WIN:
+            self.state = GameState.WIN
             print("on winTile")
 
         return task.cont
