@@ -9,6 +9,7 @@ class TileEnum(Enum):
     FLOOR = 1
     WIN = 2
     START = 3
+    FALL = 4
 
 
 FloorPlan = defaultdict[Vec2, TileEnum]
@@ -22,7 +23,7 @@ class Level:
     winTile: NodePath
     win_Collider: NodePath
 
-    def __init__(self, floorPlanPath: str, floorTile: NodePath, winTile: NodePath):
+    def __init__(self, floorPlanPath: str, floorTile: NodePath, winTile: NodePath, fallTile: NodePath):
         self.path = floorPlanPath
         self.floorPlan = self.loadLevel(floorPlanPath)
         self.winTile = winTile
@@ -31,6 +32,7 @@ class Level:
         self.startPos = None  # type: ignore
 
         self.floor = NodePath("Floor")
+        self.fallFloor = NodePath("FallingFloor")
         for i in range(20):
             for j in range(20):
                 tile = self.floorPlan[Vec2(i, j)]
@@ -39,6 +41,9 @@ class Level:
                 elif tile == TileEnum.FLOOR:
                     floor = floorTile.copy_to(self.floor)
                     floor.setPos(i, j, -5)
+                elif tile == TileEnum.FALL:
+                    floor = fallTile.copy_to(self.fallFloor)
+                    floor.setPos(i,j,-5)
                 elif tile == TileEnum.WIN:
                     if self.win_Collider is not None:
                         print("invalid level data: 2 win positions")
@@ -78,6 +83,8 @@ class Level:
                         result[pos] = TileEnum.WIN
                     elif char == "s":
                         result[pos] = TileEnum.START
+                    elif char == "f":
+                        result[pos] = TileEnum.FALL
                     else:
                         print(f"invalid level data: invalid character `{char}'")
                         exit(1)

@@ -32,14 +32,15 @@ class App(ShowBase):
         super().__init__()
         self.set_background_color(0, 0, 0, 1)
 
-        self.setupLight()
         self.task_mgr.add(self.setupCamera, "setupCamera")
 
         self.task_mgr.add(self.update, "update")
 
         self.loadLevel("levels/test.txt")
+        self.setupLight()
 
         self.state = GameState.PLAYING
+
 
         self.accept("w", self.rotate, ["w"])
         self.accept("s", self.rotate, ["s"])
@@ -56,17 +57,19 @@ class App(ShowBase):
         return model
 
     def loadLevel(self, level: str):
-        floorTile = self.loadModel("models/baseTilePy.egg")
-        winTile = self.loadModel("models/winTilePy.egg")
+        floorTile = self.loadModel("models/basetile.egg")
+        winTile = self.loadModel("models/winTile.egg")
+        fallTile = self.loadModel("models/fallTile")
 
-        self.level = Level(level, floorTile, winTile)
+        self.level = Level(level, floorTile, winTile, fallTile)
         self.level.floor.reparent_to(self.render)
+        self.level.fallFloor.reparentTo(self.render)
 
         self.loadBlock()
 
     def loadBlock(self):
         blockModel = self.loadModel("models/blockModel.egg")
-        blockModel.setPos(self.level.startPos.x, self.level.startPos.y, -3.5)
+        blockModel.setPos(self.level.startPos.x, self.level.startPos.y, -3)
         self.block = Block(blockModel)
         self.block.model.reparent_to(self.render)
 
@@ -85,6 +88,8 @@ class App(ShowBase):
         self.anim.start()
 
     def update(self, task: Task.Task):
+        # if(self.block.model.getZ() > -3):
+        #     self.block.setPos(-.1)
         if self.anim and not self.anim.isStopped():
             return task.cont
         blockTilePos = self.block.getTilePositions()
@@ -94,25 +99,48 @@ class App(ShowBase):
             self.anim = self.block.fall(blockTiles)
             self.anim.start()
             print("fall")
+
+        if len(blockTiles) == 1 and TileEnum.FALL in blockTiles:
+            self.state = GameState.FAIL
+            self.block.setPos(-.1)
+            self.level.fallFloor.remove_node()
+            print("fall")
         elif len(blockTiles) == 1 and blockTiles[0] == TileEnum.WIN:
             self.state = GameState.WIN
+            self.block.model.remove_node()
+            self.level.floor.remove_node()
             print("on winTile")
+            self.loadLevel("levels/test2.txt")
+            self.state = GameState.PLAYING
 
         return task.cont
 
     def setupLight(self):
-        dlight = DirectionalLight("dlight")
-        dlight.setShadowCaster(True)
-        dlight.setColor((1, 1, 1, 1))
-        dlnp = self.render.attachNewNode(dlight)
-        dlnp.setHpr(0, -60, 0)
-        self.render.setLight(dlnp)
+        #
+        plight = PointLight("plight")
+        plight.setColor((1, 1, 1, 1))
+        plight.setShadowCaster(True,2048,2048)
+
+        plnp = self.render.attachNewNode(plight)
+        self.render.setShaderAuto()
+
+        plnp.setPos(30,-16,48)
+        self.render.setLight(plnp)
+
+        self.render.setShaderAuto()
+
+        # adding Ambient light to the renderer
+        alight = AmbientLight("alight")
+
+        alight.setColor((0.12, 0.12, 0.12, 1))
+        alnp = self.render.attachNewNode(alight)
+
+        self.level.floor.setShaderAuto()
+        self.block.model.setShaderOff()
+
+        self.render.setLight(alnp)
 
     def setupCamera(self, task: Task.Task):
-        # angleDegrees: float = -5.0
-        # angleRadians: float = angleDegrees * (pi / 180.0)
-        # self.camera.setPos(sin(angleRadians) - 5, -30 * cos(angleRadians), 10)
-        # self.camera.setHpr(angleDegrees - 15, -20, 0)
         self.camera.setPos(-5.08, -29.89, 10)
         self.camera.setHpr(-20, -20, 0)
         return task.cont

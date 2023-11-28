@@ -139,6 +139,10 @@ def createWinFloorModel():
     data = createFloorModel(RED)
     data.writeEgg("models/winTilePy.egg")
 
+def createWinFloorModel():
+    data = createFloorModel(YELLOW)
+    data.writeEgg("models/fallTilePy.egg")
+
 
 def deg2Rad(deg: float):
     from math import pi
@@ -149,4 +153,5 @@ def deg2Rad(deg: float):
 if __name__ == "__main__":
     createBlockModel()
     createBaseFloorModel()
+    createWinFloorModel()
     createWinFloorModel()

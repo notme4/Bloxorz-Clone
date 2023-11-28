@@ -181,3 +181,10 @@ class Block:
                 Vec2(self.pos.x, self.pos.y + 0.5),
                 Vec2(self.pos.x, self.pos.y - 0.5),
             ]
+
+    def setPos(self, position):
+
+        self.pos += (0, 0, position)
+        # print(f"getPos: {self.model.getPos()}")
+        # print(f"self.pos: {self.pos}")
+        self.model.setZ(self.model.getZ() + position)
