@@ -5,6 +5,7 @@ from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
 from panda3d.core import AmbientLight, DirectionalLight, PointLight
 
+
 from block import *
 from draw import *
 from level import *
@@ -29,6 +30,7 @@ class App(ShowBase):
     level: Level
 
     def __init__(self) -> None:
+        self.curr_level = 1
         super().__init__()
         self.set_background_color(0, 0, 0, 1)
 
@@ -57,6 +59,11 @@ class App(ShowBase):
         return model
 
     def loadLevel(self, level: str):
+        if self.curr_level == 1:
+            level = "levels/test.txt"
+        elif self.curr_level == 2:
+            level = "levels/test2.txt"
+
         floorTile = self.loadModel("models/basetile.egg")
         winTile = self.loadModel("models/winTile.egg")
         fallTile = self.loadModel("models/fallTile")
@@ -76,7 +83,9 @@ class App(ShowBase):
     def resetLevel(self):
         self.state = GameState.PLAYING
         self.block.model.remove_node()
-        self.loadBlock()
+        self.level.floor.remove_node()
+        self.loadLevel("test")
+        self.block.model.setShaderOff()
 
     def rotate(self, direction: str):
         if self.anim and not self.anim.isStopped():
@@ -102,7 +111,7 @@ class App(ShowBase):
 
         if len(blockTiles) == 1 and TileEnum.FALL in blockTiles:
             self.state = GameState.FAIL
-            self.block.setPos(-.1)
+            self.block.setPos(-.25)
             self.level.fallFloor.remove_node()
             print("fall")
         elif len(blockTiles) == 1 and blockTiles[0] == TileEnum.WIN:
@@ -110,8 +119,10 @@ class App(ShowBase):
             self.block.model.remove_node()
             self.level.floor.remove_node()
             print("on winTile")
+            self.curr_level += 1
             self.loadLevel("levels/test2.txt")
             self.state = GameState.PLAYING
+            self.block.model.setShaderOff()
 
         return task.cont
 
@@ -127,14 +138,12 @@ class App(ShowBase):
         plnp.setPos(30,-16,48)
         self.render.setLight(plnp)
 
-        self.render.setShaderAuto()
-
         # adding Ambient light to the renderer
         alight = AmbientLight("alight")
 
         alight.setColor((0.12, 0.12, 0.12, 1))
         alnp = self.render.attachNewNode(alight)
-
+        self.block.model.setLight(alnp)
         self.level.floor.setShaderAuto()
         self.block.model.setShaderOff()
 

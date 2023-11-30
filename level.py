@@ -79,6 +79,8 @@ class Level:
                         result[pos] = TileEnum.FLOOR
                     elif char == " ":
                         result[pos] = TileEnum.AIR
+                    elif char == "a":
+                        result[pos] = TileEnum.AIR
                     elif char == "w":
                         result[pos] = TileEnum.WIN
                     elif char == "s":
