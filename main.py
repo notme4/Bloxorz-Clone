@@ -30,7 +30,7 @@ class App(ShowBase):
     level: Level
 
     def __init__(self) -> None:
-        self.curr_level = 1
+        self.curr_level = 0
         super().__init__()
         self.set_background_color(0, 0, 0, 1)
 
@@ -59,10 +59,12 @@ class App(ShowBase):
         return model
 
     def loadLevel(self, level: str):
-        if self.curr_level == 1:
+        if self.curr_level % 3 == 0:
             level = "levels/test.txt"
-        elif self.curr_level == 2:
+        elif self.curr_level %3 == 1:
             level = "levels/test2.txt"
+        elif self.curr_level %3 == 2:
+            level = "levels/test3.txt"
 
         floorTile = self.loadModel("models/basetile.egg")
         winTile = self.loadModel("models/winTile.egg")
@@ -84,6 +86,7 @@ class App(ShowBase):
         self.state = GameState.PLAYING
         self.block.model.remove_node()
         self.level.floor.remove_node()
+        self.level.fallFloor.remove_node()
         self.loadLevel("test")
         self.block.model.setShaderOff()
 
@@ -111,13 +114,14 @@ class App(ShowBase):
 
         if len(blockTiles) == 1 and TileEnum.FALL in blockTiles:
             self.state = GameState.FAIL
-            self.block.setPos(-.25)
+            self.block.setPos(-.2)
             self.level.fallFloor.remove_node()
             print("fall")
         elif len(blockTiles) == 1 and blockTiles[0] == TileEnum.WIN:
             self.state = GameState.WIN
             self.block.model.remove_node()
             self.level.floor.remove_node()
+            self.level.fallFloor.remove_node()
             print("on winTile")
             self.curr_level += 1
             self.loadLevel("levels/test2.txt")
@@ -150,8 +154,8 @@ class App(ShowBase):
         self.render.setLight(alnp)
 
     def setupCamera(self, task: Task.Task):
-        self.camera.setPos(-5.08, -29.89, 10)
-        self.camera.setHpr(-20, -20, 0)
+        self.camera.setPos(-5.08, -20.89, 13)
+        self.camera.setHpr(-25, -30, 0)
         return task.cont
 
 
